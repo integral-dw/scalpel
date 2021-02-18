@@ -1,0 +1,26 @@
+#+TITLE:Scalpel: A Simple Tool for Manual Text Property Editing
+
+* About
+  This package provides small tools to painlessly insert text
+  properties in a buffer.  The primary focus lies in messing with a
+  buffer's face properties.  I wrote these tools for Font Lock
+  debugging, essentially.
+
+* Quick rundown
+  I don't expect anyone to bother using this, but if you do:
+
+ * ~scalpel-anonymous-face~ ::
+   A buffer-local anonymous face (see [[info:Elisp#Faces][info node]]) you can edit
+   interactively or from lisp.
+   + ~scalpel-edit-anon-face~ ::
+     The main function used to interactively edit the above.  It also
+     always shows a small sample preview of the face as you're creating
+     it.
+   + ~scalpel-clear-anon-face~ ::
+     Quickly reset the anonymous face.
+   + ~scalpel-apply-anon-face~ ::
+     Applies the anonymous face to the region between point and mark.
+ * ~scalpel-apply-face~ ::
+   Applies a named face to the given region.
+ * ~scalpel-add-text-propery~ ::
+   Applies a generic text property.

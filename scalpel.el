@@ -4,7 +4,7 @@
 
 ;; Author: D. Williams <d.williams@posteo.net>
 ;; Keywords: faces, maint
-;; Version: 0.4.0
+;; Version: 0.4.1
 ;; Homepage: https://github.com/integral-dw/scalpel
 ;; Package-Requires: ((emacs "25.1"))
 
@@ -182,15 +182,22 @@ region."
   (interactive "r")
   (scalpel-apply-face start end scalpel-anonymous-face))
 
-(defun scalpel-add-text-propery (start end)
+(defun scalpel-add-text-propery (start end property value)
   "Add a text property in region.
 
 First two arguments START and END are positions specifying the
-region."
-  (interactive "r")
-  (when-let ((prop (scalpel--read-minibuffer "Text Property: "))
-             (val (scalpel--read-minibuffer "Value: "))
-             (proplist (list (read prop) (read val))))
+region to apply the text property to.
+
+PROPERTY is the text property to set (a symbol).  It is set to
+VALUE (a Lisp expression).  VALUE does not need to be quoted.
+For example, setting the property \"face\" to \"(:weight bold)\"
+is equivalent to generating an anonymous face with the same
+property and using ‘scalpel-apply-anon-face’."
+  (declare
+   (interactive-only
+    "use (add-text-properties START END (PROPERTY VALUE)) instead."))
+  (interactive "r\nSText Property: \nxValue: ")
+  (let ((proplist (list property value)))
     (add-text-properties start end proplist)
     (message "Property list set: %S" proplist)))
 
